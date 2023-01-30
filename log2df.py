@@ -39,6 +39,8 @@ def log2df(filename: str) -> pd.DataFrame:
                     rows[record.timestamp][entry.name] = record.getString()
                 elif entry.type == "boolean":
                     rows[record.timestamp][entry.name] = record.getBoolean()
+                elif entry.type == "msgpack":
+                    rows[record.timestamp][entry.name] = record.getMsgPack()
     # TODO: do something with arrays?
     # elif entry.type == 'boolean[]':
     # elif entry.type == 'double[]':

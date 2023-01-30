@@ -5,6 +5,7 @@
 
 import array
 import struct
+import msgpack
 from typing import List, SupportsBytes
 
 __all__ = ["StartRecordData", "MetadataRecordData", "DataLogRecord", "DataLogReader"]
@@ -162,6 +163,9 @@ class DataLogRecord:
             val, pos = self._readInnerString(pos)
             arr.append(val)
         return arr
+
+    def getMsgPack(self):
+        return msgpack.unpackb(self.data)
 
     def _readInnerString(self, pos: int) -> str:
         size = int.from_bytes(
